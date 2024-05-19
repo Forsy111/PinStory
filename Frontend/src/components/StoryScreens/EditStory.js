@@ -23,7 +23,6 @@ const EditStory = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-
         const getStoryInfo = async () => {
             setLoading(true)
             try {
@@ -94,15 +93,12 @@ const EditStory = () => {
                             data={content}
                         />
                         <div class="currentlyImage">
-                            <div class="absolute">
-                                Currently Image
-                            </div>
                             <img src={`http://localhost:5000/storyImages/${previousImage}`} alt="storyImage" />
                         </div>
                         <div class="StoryImageField">
                             <AiOutlineUpload />
                             <div class="txt">
-                                {image === previousImage ? "Change the image in your story" : image.name}
+                                {image === previousImage ? "Выберите фотографию" : image.name}
                             </div>
                             <input
                                 name="image"
@@ -114,7 +110,7 @@ const EditStory = () => {
                             />
                         </div>
                         <button type='submit' className='editStory-btn'
-                        >Edit Story </button>
+                        >Изменить пост</button>
                     </form>
                 </div>
             )}

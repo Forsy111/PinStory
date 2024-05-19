@@ -66,8 +66,8 @@
 
 .readList-story-wrapper .readList-story-item {
     border-bottom: rgba(214, 214, 214, 0.4) solid 1px;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     margin-bottom: 1.7rem;
     position: relative;
     padding-bottom: 2rem;
@@ -147,6 +147,11 @@
     justify-content: space-between;
     margin-top: 13px;
     align-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
 
 .story-bottom-block a {

@@ -8,7 +8,6 @@ const StoryComments = ({ commentlist, count, activeUser }) => {
         <>
             {count !== 0 ?
                 <div className='storyComments'>
-                    <h5>MOST RELEVANT</h5>
                     <div className="comment-Wrapper">
                         {commentlist.map((comment) => {
                             return (
@@ -17,8 +16,7 @@ const StoryComments = ({ commentlist, count, activeUser }) => {
                         })}
                     </div>
                 </div> :
-                <div className='no-response'>There are currently no responses for this story.
-                    Be the first to respond. </div>
+                <div className='no-response'>Будьте первыми, кто оставит комментарий. </div>
             }
         </>
     )

@@ -41,12 +41,12 @@ const Header = () => {
                 <div className='header_options'>
                     {auth ?
                         <div className="auth_options">
-                            <Link className='addStory-link' to="/addstory"><RiPencilFill /> Add Story </Link>
+                            <Link className='addStory-link' to="/addstory"><RiPencilFill /> Создать пост </Link>
                             <Link to="/readList" className='readList-link'>
                                 <BsBookmarks />
-                                <span id="readListLength">
+                                {/* <span id="readListLength">
                                     {activeUser.readListLength}
-                                </span>
+                                </span> */}
                             </Link>
                             <div className='header-profile-wrapper '>
                                 {loading ? <SkeletonElement type="minsize-avatar" />
@@ -54,15 +54,15 @@ const Header = () => {
                                     <img src={`/userPhotos/${activeUser.photo}`} alt={activeUser.username} />
                                 }
                                 <div className="sub-profile-wrap  ">
-                                    <Link className='profile-link' to="/profile"  > <FaUserEdit />  Profile </Link>
-                                    <button className='logout-btn' onClick={handleLogout}> <BiLogOut />  Logout</button>
+                                    <Link className='profile-link' to="/profile"  > <FaUserEdit />  Профиль </Link>
+                                    <button className='logout-btn' onClick={handleLogout}> <BiLogOut />  Выйти</button>
                                 </div>
                             </div>
                         </div>
                         :
                         <div className="noAuth_options">
-                            <Link className='login-link' to="/login"> Login </Link>
-                            <Link className='register-link' to="/register"> Get Started</Link>
+                            <Link className='login-link' to="/login"> Войти </Link>
+                            <Link className='register-link' to="/register"> Зарегистрироваться</Link>
                         </div>
                     }
                 </div>

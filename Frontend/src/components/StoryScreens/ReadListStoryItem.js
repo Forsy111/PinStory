@@ -10,52 +10,34 @@ const ReadListStoryItem = ({ story, editDate }) => {
     }
 
     return (
-        <div className="readList-story-item">
-            <section>
-                <div className="story-top-block">
-                    <div className="readList-story-author">
-                        {story.author.username}
+        <a href={`story/${story.slug}`}>
+            <div className="readList-story-item">
+                <section>
+                    <div className="story-Image-Wrap">
+                        <img src={`/storyImages/${story.image}`} alt={story.title} width="180px" />
                     </div>
-                    <span>-</span>
-                    <div className="readList-story-createdAt">
-                        {editDate(story.createdAt)}
-                    </div>
-                    <i>
-                        <AiFillStar />
-                    </i>
-                </div>
-                <div className="story-med-block">
-                    <div className="readList-story-title">
-                        <a href={`story/${story.slug}`}>
-                            {story.title}
-                        </a>
-                    </div>
-                    <div className="readList-story-content">
-                        <span dangerouslySetInnerHTML={{ __html: truncateContent(story.content) + "..." }}></span>
-                    </div>
-                </div>
-                <div className="story-bottom-block">
-                    <a href={`story/${story.slug}`}>
-                        <span>Read More</span>
+                </section>
+                
+                <section>
+                    <div className="story-top-block">
+                        <div className="readList-story-author">
+                            {story.author.username}
+                        </div>
                         <span>-</span>
-                        {/* <span>{story.readtime} min read</span> */}
-                    </a>
-                    <div>
-                        <i>
-                            <BsBookmarkFill />
-                        </i>
-                        <i>
-                            < BsThreeDots />
-                        </i>
+                        <div className="readList-story-createdAt">
+                            {editDate(story.createdAt)}
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section>
-                <div className="story-Image-Wrap">
-                    <img src={`/storyImages/${story.image}`} alt={story.title} width="180px" />
-                </div>
-            </section>
-        </div>
+                    <div className="story-med-block">
+                        <div className="readList-story-title">
+                            <a href={`story/${story.slug}`}>
+                                {story.title}
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </a>
     )
 }
 

@@ -256,6 +256,10 @@ li.story-readtime {
     text-decoration: none;
 }
 
+.delete_or_edit_story .deleteStoryLink p{
+    color: rgb(161, 2, 2);
+}
+
 .delete_or_edit_story a {
     text-decoration: none;
 }

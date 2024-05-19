@@ -21,10 +21,8 @@ const Home = () => {
 
   useEffect(() => {
     const getStories = async () => {
-
       setLoading(true)
       try {
-
         const { data } = await axios.get(`/story/getAllStories?search=${searchKey || ""}&page=${page}`)
 
         if (searchKey) {
@@ -38,12 +36,9 @@ const Home = () => {
             pathname: '/',
             search: `${page > 1 ? `page=${page}` : ""}`,
           });
-
-
         }
         setStories(data.data)
         setPages(data.pages)
-
         setLoading(false)
       }
       catch (error) {
@@ -53,16 +48,13 @@ const Home = () => {
     getStories()
   }, [setLoading, search, page, navigate])
 
-
   useEffect(() => {
     setPage(1)
   }, [searchKey])
 
-
   return (
     <div className="Inclusive-home-page">
       {loading ?
-
         <div className="skeleton_emp">
           {
             [...Array(6)].map(() => {
@@ -72,7 +64,6 @@ const Home = () => {
               )
             })}
         </div>
-
         :
         <div>
           <div className="story-card-wrapper">
@@ -83,22 +74,13 @@ const Home = () => {
                 )
               }) : <NoStories />
             }
-            <img className="bg-planet-svg" src="planet.svg" alt="planet" />
-            <img className="bg-planet2-svg" src="planet2.svg" alt="planet" />
-            <img className="bg-planet3-svg" src="planet3.svg" alt="planet" />
-
           </div>
-
           <Pagination page={page} pages={pages} changePage={setPage} />
-
         </div>
-
       }
       <br />
     </div>
-
   )
-
 };
 
 export default Home;

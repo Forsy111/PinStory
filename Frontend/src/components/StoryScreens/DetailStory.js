@@ -113,8 +113,11 @@ const DetailStory = () => {
 
   const editDate = (createdAt) => {
 
+    const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+      "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+    ];
     const d = new Date(createdAt);
-    var datestring = d.toLocaleString('eng', { month: 'long' }).substring(0, 3) + " " + d.getDate()
+    var datestring = d.getDate() + " " + monthNames[d.getMonth()] + ", " + d.getFullYear()
     return datestring
   }
 
@@ -160,10 +163,6 @@ const DetailStory = () => {
                         editDate(story.createdAt)
                       }
                     </li>
-                    {/* <b>-</b> */}
-                    {/* <li className='story-readtime'>
-                      {story.readtime} min read
-                    </li> */}
                   </ul>
                   {
                     !activeUser.username &&
@@ -177,7 +176,7 @@ const DetailStory = () => {
                     </div>
                   }
                   {activeUser && story.author &&
-                    story.author._id === activeUser._id || 
+                    story.author._id === activeUser._id ||
                     activeUser && activeUser.role == "admin" ?
                     <div className="top_story_transactions">
                       <Link className='editStoryLink' to={`/story/${story.slug}/edit`}>
@@ -242,10 +241,10 @@ const DetailStory = () => {
                         story.author._id === activeUser._id ?
                         <div className="delete_or_edit_story  ">
                           <Link className='editStoryLink' to={`/story/${story.slug}/edit`}>
-                            <p>Edit Story</p>
+                            <p>Редактировать</p>
                           </Link>
                           <div className='deleteStoryLink' onClick={handleDelete}>
-                            <p>Delete Story</p>
+                            <p>Удалить</p>
                           </div>
                         </div> : null
                       }

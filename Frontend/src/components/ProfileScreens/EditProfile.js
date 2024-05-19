@@ -18,7 +18,6 @@ const EditProfile = () => {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formdata = new FormData()
@@ -57,45 +56,39 @@ const EditProfile = () => {
             {
                 loading ? <Loader /> :
                     <div className="Inclusive-editprofile-page">
-
                         <form onSubmit={handleSubmit}>
                             {error && <div className="error_msg">{error}</div>}
-
-                            {success && <div className="success_msg">{success}  </div>}
+                            {success && <div className="success_msg">{success}</div>}
 
                             <div className="input-wrapper">
                                 <input type="text"
-                                    id="username" placeholder="Username  " name='username'
+                                    id="username" placeholder="Имя"
+                                    name='username'
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
-                                <label htmlFor="username">Username</label>
-
+                                <label htmlFor="username">Имя</label>
                             </div>
 
                             <div className="input-wrapper">
-
                                 <input type="email"
-                                    id="email" placeholder="Email  " name='email'
+                                    id="email" placeholder="Email"
+                                    name='email'
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <label htmlFor="email">E-mail</label>
-
                             </div>
 
                             <div className="profile-ımg-upld-wrapper">
-
                                 <div class="ProfilePhotoField">
                                     <FaUserAlt />
                                     <div class="txt">
-
                                         {photo === previousPhoto ?
                                             <div>
                                                 <AiOutlineUpload />
                                                 <span>
-                                                    Change Profile Photo
-
+                                                    Изменить фотографию
                                                 </span>
                                             </div>
                                             :
@@ -105,42 +98,24 @@ const EditProfile = () => {
                                     <input
                                         name="photo"
                                         type="file"
-
                                         onChange={(e) => {
                                             setPhoto(e.target.files[0])
                                         }}
                                     />
-
-
                                 </div>
-
 
                                 <div class="currentImage">
-                                    <div class="absolute">
-                                        Currently Image
-                                    </div>
                                     <img src={`http://localhost:5000/userPhotos/${previousPhoto}`} alt="userPhoto" />
                                 </div>
-
                             </div>
 
-                            <button type='submit' className='editprofile-btn'
-                            >Edit Profile </button>
-
-
-
+                            <button type='submit' className='editprofile-btn'>
+                                Изменить профиль
+                            </button>
                         </form>
-
-
-
-
-
-
-
                     </div>
             }
         </>
-
     )
 }
 

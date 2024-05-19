@@ -66,6 +66,19 @@
     font-size: 0.8rem;
 }
 
+.comment-top-block .delete-Btn {
+    background-color: rgb(161, 2, 2);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 7px;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Mukta', sans-serif;
+    transition: 350ms ease;
+}
+
 .comment-content {
     padding-left: 4px;
     height: auto;

@@ -25,9 +25,8 @@ const ChangePassword = () => {
             setTimeout(() => {
                 setError("");
             }, 5000);
-            return setError("Passwords don't match");
+            return setError("Пароли не совпадают");
         }
-
         try {
             const { data } = await axios.put(
                 "/user/changePassword",
@@ -54,23 +53,20 @@ const ChangePassword = () => {
                 setError("");
             }, 5800);
         }
-
     }
-
-
 
     return (
         <div className="Inclusive-changePass-page" >
             <form onSubmit={handleSubmit}>
                 {error && <div className="error_msg">{error}</div>}
-                {success && <div className="success_msg">{success}<Link to="/profile">Go Profile</Link>  </div>}
-
+                {success && <div className="success_msg">{success}<Link to="/profile">Назад к профилю</Link>  </div>}
 
                 <div className="input-wrapper">
-
                     <input type={isRevealPass1 ? "text" : "password"}
                         autoComplete='off'
-                        id="old_password" placeholder="Old Password  " name='old_password'
+                        id="old_password"
+                        placeholder="Старый пароль"
+                        name='old_password'
                         required
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
@@ -79,51 +75,48 @@ const ChangePassword = () => {
                         {isRevealPass1 ? <IoEyeOffOutline /> : <IoEyeOutline />
                         }
                     </i>
-                    <label htmlFor="old_password">Old Password </label>
-
+                    <label htmlFor="old_password">Старый пароль</label>
                 </div>
 
                 <div className="input-wrapper">
                     <input type={isRevealPass2 ? "text" : "password"}
                         id="new_password"
                         autoComplete='off'
-                        placeholder="New Password  " name='new_password'
+                        placeholder="Новый пароль"
+                        name='new_password'
                         required
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                     />
-
                     <i onClick={() => (setIsRevealPass2(!isRevealPass2))}>
                         {isRevealPass2 ? <IoEyeOffOutline /> : <IoEyeOutline />
                         }
                     </i>
-                    <label htmlFor="new_password">New Password </label>
+                    <label htmlFor="new_password">Новый пароль</label>
                 </div>
 
                 <div className="input-wrapper">
                     <input type={isRevealPass3 ? "text" : "password"}
                         id="confirm_password"
                         autoComplete='off'
-                        placeholder="Confirm Password  " name='confirm_password'
+                        placeholder="Подтвердите пароль"
+                        name='confirm_password'
                         value={confirmPassword}
                         required
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-
                     <i onClick={() => (setIsRevealPass3(!isRevealPass3))}>
                         {isRevealPass3 ? <IoEyeOffOutline /> : <IoEyeOutline />
                         }
                     </i>
-                    <label htmlFor="confirm_password">Confirm Password </label>
+                    <label htmlFor="confirm_password">Подтвердите пароль</label>
                 </div>
 
-                <button type='submit' className='updatePass-btn'
-                >Update Password </button>
-
+                <button type='submit' className='updatePass-btn'>
+                    Обновить пароль
+                </button>
             </form>
-
         </div>
-
     )
 }
 

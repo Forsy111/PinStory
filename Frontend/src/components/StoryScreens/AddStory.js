@@ -37,7 +37,7 @@ const AddStory = () => {
 
         try {
             const { data } = await axios.post("/story/addstory", formdata, config)
-            setSuccess('Add story successfully ')
+            setSuccess('Публикация добавлена')
             clearInputs()
             setTimeout(() => {
                 setSuccess('')
@@ -62,13 +62,13 @@ const AddStory = () => {
                     <span>
                         {success}
                     </span>
-                    <Link to="/">Go home</Link>
+                    <Link to="/">На главную</Link>
                 </div>}
                 <input
                     type="text"
                     required
                     id="title"
-                    placeholder="Title"
+                    placeholder="Название"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                 />
@@ -84,7 +84,7 @@ const AddStory = () => {
                     <AiOutlineUpload />
                     <div class="txt">
                         {image ? image.name :
-                            " Include a high-quality image in your story to make it more inviting to readers."
+                            "Добавьте фотографию."
                         }
                     </div>
                     <input
@@ -96,8 +96,9 @@ const AddStory = () => {
                         }}
                     />
                 </div>
-                <button type='submit' disabled={image ? false : true} className={image ? 'addStory-btn' : 'dis-btn'}
-                >Publish </button>
+                <button type='submit' disabled={image ? false : true} className={image ? 'addStory-btn' : 'dis-btn'}>
+                    Создать пост
+                </button>
             </form>
         </div>
     )

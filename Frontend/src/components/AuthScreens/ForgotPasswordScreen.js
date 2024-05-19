@@ -36,28 +36,28 @@ const ForgotPasswordScreen = () => {
           onSubmit={forgotPasswordHandler}
         >
           <div className="top-forgotpassword-explain">
-            <h3 >Forgot Password</h3>
+            <h3 >Забыли пароль</h3>
             <p >
-              Please enter the email address you register your account with. We
-              will send you reset password confirmation to this email
+              Пожалуйста, введите адрес электронной почты, на который вы зарегистрировали свою учетную запись. Мы
+              отправит вам подтверждение сброса пароля на этот адрес электронной почты
             </p>
           </div>
           {error && <div className="error_message">{error}</div>}
           {success && <div className="success_message  ">{success}  -
-            <Link to="/" className="ml-3">Go home</Link></div>}
+            <Link to="/" className="ml-3">На главную</Link></div>}
           <div className="input-wrapper">
             <input
               type="email"
               required
               id="email"
-              placeholder="Email address"
+              placeholder="E-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="email">E-mail</label>
           </div>
           <button type="submit">
-            Send Email
+            Отправить письмо
           </button>
         </form>
       </div>

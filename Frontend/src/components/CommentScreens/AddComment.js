@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios';
-import StarRating from './StarRating';
 import { BsShieldCheck, BsCheckAll } from 'react-icons/bs'
 import { IoAdd } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +9,6 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
 
     const navigate = useNavigate();
     const textareaRef = useRef(null)
-    const [star, setStar] = useState(0);
-    const [starCurrentVal, setStarCurrentVal] = useState(0);
     const [content, setContent] = useState('')
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
@@ -21,14 +18,14 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
 
         e.preventDefault();
         try {
-            await axios.post(`/comment/${slug}/addComment`, { content, star }, {
+            await axios.post(`/comment/${slug}/addComment`, { content }, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             })
 
-            setSuccess('Add Comment successfully ')
+            setSuccess('Комментарий отправлен')
             setTimeout(() => {
                 setSuccess('')
             }, 2700)
@@ -53,8 +50,6 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
     }
 
     const clearInputs = () => {
-        setStar(0)
-        setStarCurrentVal(0)
         setContent('')
         textareaRef.current.textContent = ''
     }
@@ -63,7 +58,7 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
         <>
 
             <div className="sidebar-top-block">
-                <h3>Responses ( <span className='sidebar-commentCount'>{count}</span> )</h3>
+                <h3>Комментарии ( <span className='sidebar-commentCount'>{count}</span> )</h3>
                 <div>
                     < BsShieldCheck />
                     <IoAdd onClick={() => setSidebarShowStatus(false)} className='ıoAddIcon' />
@@ -84,7 +79,8 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
                     <div className="textarea-wrapper">
                         <div ref={textareaRef}
                             contentEditable
-                            placeholder='What are your thoughts ?' id="comment"
+                            placeholder='Ваш комментарий...'
+                            id="comment"
                             name="content"
                             onKeyUp={(e) => {
                                 setContent(e.target.innerHTML)
@@ -95,15 +91,14 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
                         ></div>
                     </div>
                     <div className={showStatus ? 'form-bottom-block' : 'form-bottom-block hidden'} >
-                        {/* <StarRating setStar={setStar} setStarCurrentVal={setStarCurrentVal} starCurrentVal={starCurrentVal} /> */}
                         <div className="formBtn-wrapper">
                             <button type='button'
                                 className='cancel-Btn'
                                 onClick={() => setShowStatus(!showStatus)}
-                            >Cancel </button>
+                            >Назад </button>
                             <button type='submit' className={content === '' ? 'respond-Btn disable' : 'respond-Btn'}
                                 disabled={content === '' ? true : false}
-                            >Respond </button>
+                            >Отправить </button>
                         </div>
                     </div>
                 </form>

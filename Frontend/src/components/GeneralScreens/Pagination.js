@@ -7,21 +7,16 @@ const Pagination = ({ page, pages, changePage }) => {
     function numberRange(start, end) {
         return new Array(end - start).fill().map((d, i) => i + start);
     }
-
     let middlePagination;
-
     if (pages <= 5) {
         middlePagination = [...Array(pages)].map((__, index) => (
-
             <button
                 key={index + 1}
                 onClick={() => changePage(index + 1)}
                 disabled={page === index + 1}
             >
                 {index + 1}
-
             </button>
-
         ))
     }
     else {
@@ -37,17 +32,14 @@ const Pagination = ({ page, pages, changePage }) => {
                     >
                         {startValue + index + 1}
                     </button>
-
                 ))}
                 <button>...</button>
                 <button
-
                     onClick={() => changePage(pages)} disabled={page === pages}>
                     {pages}
                 </button>
             </>
         );
-
         if (page > 5) {
             if (pages - page >= 5) {
                 middlePagination = (
@@ -55,18 +47,15 @@ const Pagination = ({ page, pages, changePage }) => {
                         <button onClick={() => changePage(1)}>1</button>
                         <button>...</button>
                         <button onClick={() => changePage(startValue)}>{startValue}</button>
-
                         {numberRange(startValue, pages).map((__, index) => (
                             <button
                                 key={startValue + index + 1}
                                 onClick={() => changePage(startValue + index + 1)}
 
                                 disabled={page === startValue + index + 1}
-
                             >
                                 {startValue + index + 1}
                             </button>
-
                         ))}
                         <button>...</button>
                         <button
@@ -76,7 +65,6 @@ const Pagination = ({ page, pages, changePage }) => {
                     </>
                 )
             }
-
             else {
                 let amountLeft = pages - page + 5
                 middlePagination = (
@@ -112,7 +100,6 @@ const Pagination = ({ page, pages, changePage }) => {
                 >
                     {page === 1 ? <TiMinus color='gray' /> :
                         <FaChevronLeft />
-
                     }
                 </button>
                 {middlePagination}
@@ -122,7 +109,6 @@ const Pagination = ({ page, pages, changePage }) => {
                 >
                     {page === pages ? <TiMinus color='gray' /> :
                         <FaChevronRight />
-
                     }
                 </button>
             </div>

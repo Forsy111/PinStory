@@ -5,7 +5,7 @@ const Comment = require("../Models/comment");
 const addNewCommentToStory = asyncErrorWrapper(async (req, res, next) => {
 
     const { slug } = req.params
-    const { star, content } = req.body
+    const { content } = req.body
     const story = await Story.findOne({ slug: slug })
     const comment = await Comment.create({
         story: story._id,
@@ -25,15 +25,13 @@ const deleteComment = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const story = await Story.findOne({ slug: slug })
     const { comment_id } = req.params
-    const comment = await Comment.findOne({ id: comment_id })
+    const comment = await Comment.findOne({ _id: comment_id })
+    await comment.remove()
     const storyCommentUserIds = story.comments.map(json => json._id.toString())
-    const index = storyCommentUserIds.indexOf(comment_id._id)
+    const index = storyCommentUserIds.indexOf(comment._id)
     story.comments.splice(index, 1)
     story.commentCount = story.comments.length
-    console.log = ({comment_id});
-    console.log = ({index});
     await story.save();
-    await comment.remove()
 
     return res.status(200).
         json({

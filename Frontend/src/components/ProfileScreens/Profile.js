@@ -12,38 +12,30 @@ const Profile = () => {
     const [loading, setLoading] = useState(true)
 
     const editDate = (createdAt) => {
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+        const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+            "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
         ];
         const d = new Date(createdAt);
         var datestring = d.getDate() + " " + monthNames[d.getMonth()] + " , " + d.getFullYear()
         return datestring
     }
-
     const navigate = useNavigate()
 
     useEffect(() => {
-
         const getUserProfile = async () => {
-
             setLoading(true)
-
             try {
                 const { data } = await axios.get("/user/profile", config)
 
                 setUser(data.data)
-
                 setLoading(false)
             }
             catch (error) {
                 navigate('/')
             }
         }
-
         getUserProfile()
     }, [setLoading])
-
-
 
     return (
         <>
@@ -54,10 +46,9 @@ const Profile = () => {
                             <FiArrowLeft />
                         </Link>
                         <ul>
-
                             <li>
                                 <span>
-                                    Username
+                                    Имя пользователя
                                 </span>
                                 <div>
                                     {user.username}
@@ -68,27 +59,24 @@ const Profile = () => {
                                 <div>
                                     {user.email}
                                 </div>
-
                             </li>
                             <li>
-
-                                <span> Account Created Date </span>
+                                <span>Дата создания аккаунта</span>
                                 <div>
                                     {editDate(user.createdAt)}
                                 </div>
                             </li>
-
                         </ul>
 
                         <div className='btns_wrap'>
                             <button className='profileEditBtn'>
                                 <Link to="/edit_profile">
-                                    Edit Profile
+                                    Изменить профиль
                                 </Link>
                             </button>
                             <button className='changePassBtn'>
                                 <Link to="/change_password">
-                                    Change Password
+                                    Изменить пароль
                                 </Link>
                             </button>
                         </div>

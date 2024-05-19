@@ -19,7 +19,6 @@ const ReadListPage = () => {
     useEffect(() => {
         const getUserReadingList = async () => {
             setLoading(true)
-
             try {
                 const { data } = await (await axios.get(`/user/readList`, config)).data
                 setReadList(data)
@@ -30,89 +29,63 @@ const ReadListPage = () => {
             }
         }
         getUserReadingList()
-
-
     }, [])
 
-
     const editDate = (createdAt) => {
-
+        const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+            "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+        ];
         const d = new Date(createdAt);
-        var datestring = d.toLocaleString('eng', { month: 'long' }).substring(0, 3) + "  " + d.getDate()
+        var datestring = d.getDate() + " " + monthNames[d.getMonth()] + ", " + d.getFullYear()
         return datestring
     }
-
 
     return (
         <>
             {loading ? <Loader /> :
 
+
+
                 <div className="Inclusive-readList-page">
                     <Link to={'/'} >
                         <FiArrowLeft />
                     </Link>
-                    <h2>Reading List </h2>
+                    <h2>Избранное</h2>
 
                     <div className="readList-top-block">
-
                         <img src={`/userPhotos/${activeUser.photo}`} alt={activeUser.username} />
-
-
                         <div className='activeUser-info-wrapper'>
-
-                            <b>
-                                {activeUser.username}
-                            </b>
-
+                            <b>{activeUser.username}</b>
                             <div>
                                 <span>
                                     {editDate(Date.now())}
                                 </span>
                                 <span>-</span>
                                 <span>
-                                    {activeUser.readListLength} stories
+                                    {activeUser.readListLength} постов
                                 </span>
-                                <i>
-                                    <AiFillLock />
-                                </i>
                             </div>
-
                         </div>
-
-                        <i className='BsThreeDots-icon'>
-                            < BsThreeDots />
-                        </i>
-
                     </div>
 
                     <div className="readList-story-wrapper">
-
                         {readList.length !== 0 ?
                             <>
                                 {readList.map(story => {
                                     return (
                                         <ReadListStoryItem key={story._id} story={story} editDate={editDate} />
-
                                     )
                                 })}
                             </>
-
                             :
-
                             <div className="empty-readList">
-
-                                Reading List is empty
-
+                                В избранном пусто
                             </div>
                         }
-
-
                     </div>
-
                 </div>
             }
         </>
-
     )
 }
 

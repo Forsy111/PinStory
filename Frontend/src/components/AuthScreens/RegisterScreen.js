@@ -19,7 +19,7 @@ const RegisterScreen = () => {
       setTimeout(() => {
         setError("");
       }, 8000);
-      return setError("Passwords do not match");
+      return setError("Пароли не совпадают");
     }
     try {
       const { data } = await axios.post(
@@ -52,14 +52,14 @@ const RegisterScreen = () => {
         </div>
         <div className="section-wrapper">
           <div className="top-suggest_login">
-            <span> Have an account? </span>
-            <a href="/login">Sign In</a>
+            <span> У вас есть аккаунт? </span>
+            <a href="/login">Войти</a>
           </div>
           <div className="top-register-explain">
-            <h2>Welcome to PinStory </h2>
-            <p>
+            <h2>Приветствуем в PinStory </h2>
+            {/* <p>
               It's easy and free to post your thinking on any topic and connect with thounsands of readers.
-            </p>
+            </p> */}
           </div>
           <form onSubmit={registerHandler} >
             {error && <div className="error_message">{error}</div>}
@@ -68,11 +68,11 @@ const RegisterScreen = () => {
                 type="text"
                 required
                 id="name"
-                placeholder="Enter username"
+                placeholder="Введите ваше имя"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label htmlFor="name">Username</label>
+              <label htmlFor="name">Имя</label>
             </div>
             <div className="input-wrapper">
               <input
@@ -92,13 +92,13 @@ const RegisterScreen = () => {
                 required
                 id="password"
                 autoComplete="true"
-                placeholder="6+ strong character"
+                placeholder="6+ символов"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 tabIndex={2}
               />
               <label htmlFor="password">
-                Password
+                Пароль
               </label>
             </div>
             <div className="input-wrapper">
@@ -107,14 +107,14 @@ const RegisterScreen = () => {
                 required
                 id="confirmpassword"
                 autoComplete="true"
-                placeholder="Confirm password"
+                placeholder="Подтвердите пароль"
                 value={confirmpassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <label htmlFor="confirmpassword">Confirm Password</label>
+              <label htmlFor="confirmpassword">Подтвердите пароль</label>
             </div>
             <button type="submit" >
-              Register
+              Регистрация
             </button>
           </form>
         </div>

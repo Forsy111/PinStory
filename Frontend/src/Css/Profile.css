@@ -107,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Mukta';
+    font-family: 'Mukta', sans-serif;
     transition: 450ms ease;
     font-size: 0.9rem;
 }

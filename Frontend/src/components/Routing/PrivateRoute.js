@@ -34,16 +34,13 @@ const PrivateRoute =( ) => {
 
             setAuth(false)
             setActiveUser({})
-
             navigate("/")
-
             setError("You are not authorized please login"); 
         }
         };
 
         controlAuth()
     }, [bool,navigate])
-
 
     return (auth ? <Outlet />  : <Home error={error} />)
 }

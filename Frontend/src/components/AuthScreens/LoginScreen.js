@@ -34,13 +34,13 @@ const LoginScreen = () => {
       <div className="login-big-wrapper">
         <div className="section-wrapper">
           <div className="top-suggest_register">
-            <span>Don't have an account? </span>
-            <a href="/register">Sign Up</a>
+            <span>У вас нет учетной записи? </span>
+            <a href="/register">Зарегистрироваться</a>
           </div>
           <div className="top-login-explain">
-            <h2>Login to Your Account </h2>
+            <h2>Войдите в свой аккаунт</h2>
             <p>
-              Please Login Your Account, Thank You!
+              Пожалуйста, войдите в свою учетную запись, спасибо!
             </p>
           </div>
           <form onSubmit={loginHandler} >
@@ -69,13 +69,13 @@ const LoginScreen = () => {
                 tabIndex={2}
               />
               <label htmlFor="password">
-                Password
+                Пароль
               </label>
             </div>
-            <Link to="/forgotpassword" className="login-screen__forgotpassword"> Forgot Password ?
+            <Link to="/forgotpassword" className="login-screen__forgotpassword"> Забыли пароль?
             </Link>
             <button type="submit" >
-              Login
+              Вход
             </button>
           </form>
         </div>

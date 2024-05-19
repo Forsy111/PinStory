@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaStar } from 'react-icons/fa';
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
-import {
-    MdOutlineWavingHand,
-    MdWavingHand
-} from 'react-icons/md'
 import { BsThreeDots } from 'react-icons/bs'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,13 +33,15 @@ const CommentItem = ({ comment, activeUser }) => {
     }, [])
 
     const editDate = (createdAt) => {
+        const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+            "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+        ];
         const d = new Date(createdAt);
-        var datestring = d.toLocaleString('eng', { month: 'long' }).substring(0, 3) + " " + d.getDate()
+        var datestring = d.getDate() + " " + monthNames[d.getMonth()] + ", " + d.getFullYear()
         return datestring
     }
 
     const handleCommentLike = async () => {
-        console.log("like comment ıtem ın  basıldı ")
         const comment_id = comment._id
         try {
             const { data } = await axios.post(`/comment/${comment_id}/like`, { activeUser }, {
@@ -56,7 +53,6 @@ const CommentItem = ({ comment, activeUser }) => {
 
             setLikeCount(data.data.likeCount)
             setLikeStatus(data.likeStatus)
-
         }
         catch (error) {
             localStorage.removeItem("authToken")
@@ -97,11 +93,11 @@ const CommentItem = ({ comment, activeUser }) => {
                 <section className='BsThreeDots_opt'>
                     {activeUser &&
                         comment.author._id === activeUser._id ?
-                    <button type='button'
-                        className='cancel-Btn'
-                        onClick={handleDelete}
-                    > Delete </button>
-                    :null
+                        <button type='button'
+                            className='delete-Btn'
+                            onClick={handleDelete}
+                        > Удалить </button>
+                        : null
                     }
                 </section>
             </div>
@@ -121,20 +117,6 @@ const CommentItem = ({ comment, activeUser }) => {
                         {likeCount}
                     </span>
                 </div>
-                {/* <div className="comment-star">
-                    {
-                        [...Array(5)].map((_, index) => {
-                            return (
-                                <FaStar
-                                    key={index}
-                                    className="star"
-                                    size={15}
-                                    color={comment.star > index ? "#0205b1" : "grey"}
-                                />
-                            )
-                        })
-                    }
-                </div> */}
             </div>
         </div>
     )

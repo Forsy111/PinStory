@@ -4,6 +4,7 @@ const Story = require("../Models/story");
 const CustomError = require("../Helpers/error/CustomError");
 const { comparePassword, validateUserInput } = require("../Helpers/input/inputHelpers");
 
+// профиль
 const profile = asyncErrorWrapper(async (req, res, next) => {
     return res.status(200).json({
         success: true,
@@ -11,6 +12,7 @@ const profile = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// изменить профиль
 const editProfile = asyncErrorWrapper(async (req, res, next) => {
     const { email, username } = req.body
     const user = await User.findByIdAndUpdate(req.user.id, {
@@ -27,6 +29,7 @@ const editProfile = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// изменить пароль
 const changePassword = asyncErrorWrapper(async (req, res, next) => {
     const { newPassword, oldPassword } = req.body
     if (!validateUserInput(newPassword, oldPassword)) {
@@ -46,6 +49,7 @@ const changePassword = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// добавить в избранное
 const addStoryToReadList = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params
     const { activeUser } = req.body;
@@ -71,6 +75,7 @@ const addStoryToReadList = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// вывод избранного
 const readListPage = asyncErrorWrapper(async (req, res, next) => {
     const user = await User.findById(req.user.id)
     const readList = []

@@ -19,7 +19,7 @@ const checkUserAndStoryExist = asyncErrorWrapper(async (req, res, next) => {
         slug: slug,
         author: req.user
     })
-    if (!story) {
+    if (!story && req.user.role !== 'admin') {
         return next(new CustomError("Нет истории пользователя ", 400))
     }
     next();

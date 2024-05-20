@@ -3,6 +3,7 @@ const Story = require("../Models/story");
 const deleteImageFile = require("../Helpers/Libraries/deleteImageFile");
 const { searchHelper, paginateHelper } = require("../Helpers/query/queryHelpers")
 
+// создать пост
 const addStory = asyncErrorWrapper(async (req, res, next) => {
 
     const { title, content } = req.body
@@ -26,6 +27,7 @@ const addStory = asyncErrorWrapper(async (req, res, next) => {
     }
 })
 
+// вывод всех постов
 const getAllStories = asyncErrorWrapper(async (req, res, next) => {
     let query = Story.find();
     query = searchHelper("title", query, req)
@@ -42,6 +44,7 @@ const getAllStories = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// вывод одного поста
 const detailStory = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const { activeUser } = req.body
@@ -58,6 +61,7 @@ const detailStory = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
+// лайк на пост
 const likeStory = asyncErrorWrapper(async (req, res, next) => {
     const { activeUser } = req.body
     const { slug } = req.params;
@@ -84,11 +88,12 @@ const likeStory = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
+// страница редактирования поста
 const editStoryPage = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const story = await Story.findOne({
         slug: slug
-    }).populate("author likes")
+    })
     return res.status(200).
         json({
             success: true,
@@ -96,7 +101,7 @@ const editStoryPage = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
-
+// изменить пост
 const editStory = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const { title, content, image, previousImage } = req.body;
@@ -105,12 +110,12 @@ const editStory = asyncErrorWrapper(async (req, res, next) => {
     story.content = content;
     story.image = req.savedStoryImage;
     if (!req.savedStoryImage) {
-        // if the image is not sent
+        // если новая картинка не загружена
         story.image = image
     }
     else {
-        // if the image sent
-        // old image locatıon delete
+        // если новая картинка
+        // удалить старую
         deleteImageFile(req, previousImage)
     }
     await story.save();
@@ -121,6 +126,7 @@ const editStory = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
+// удалить пост
 const deleteStory = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const story = await Story.findOne({ slug: slug })

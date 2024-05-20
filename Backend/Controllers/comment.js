@@ -2,6 +2,7 @@ const asyncErrorWrapper = require("express-async-handler")
 const Story = require("../Models/story");
 const Comment = require("../Models/comment");
 
+// Создание комментария
 const addNewCommentToStory = asyncErrorWrapper(async (req, res, next) => {
 
     const { slug } = req.params
@@ -21,6 +22,7 @@ const addNewCommentToStory = asyncErrorWrapper(async (req, res, next) => {
     })
 })
 
+// Удаление комментария
 const deleteComment = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params;
     const story = await Story.findOne({ slug: slug })
@@ -41,7 +43,7 @@ const deleteComment = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
-
+// Вывод комментариев к посту
 const getAllCommentByStory = asyncErrorWrapper(async (req, res, next) => {
     const { slug } = req.params
     const story = await Story.findOne({ slug: slug })
@@ -59,6 +61,7 @@ const getAllCommentByStory = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
+// Лайк на комментарий
 const commentLike = asyncErrorWrapper(async (req, res, next) => {
     const { activeUser } = req.body
     const { comment_id } = req.params
@@ -84,6 +87,7 @@ const commentLike = asyncErrorWrapper(async (req, res, next) => {
         })
 })
 
+// Вывод лайка к комментарию
 const getCommentLikeStatus = asyncErrorWrapper(async (req, res, next) => {
     const { activeUser } = req.body
     const { comment_id } = req.params

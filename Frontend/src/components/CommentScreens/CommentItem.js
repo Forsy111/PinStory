@@ -72,8 +72,7 @@ const CommentItem = ({ comment, activeUser }) => {
                 })
 
                 // navigate(`/story/${story.slug}`)
-                // location.reload()
-                // window.location.reload();
+                window.location.reload();
             }
             catch (error) {
                 console.log(error)
@@ -93,7 +92,8 @@ const CommentItem = ({ comment, activeUser }) => {
                 </section>
                 <section className='BsThreeDots_opt'>
                     {activeUser &&
-                        comment.author._id === activeUser._id ?
+                        comment.author._id === activeUser._id ||
+                        activeUser.role === 'admin' ?
                         <button type='button'
                             className='delete-Btn'
                             onClick={handleDelete}

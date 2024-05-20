@@ -9,7 +9,6 @@ const CommentItem = ({ comment, activeUser }) => {
     const slug = useParams().slug
     const [likeCount, setLikeCount] = useState(comment.likeCount)
     const [likeStatus, setLikeStatus] = useState(false)
-    const [commentlist, setCommentList] = useState([])
 
     useEffect(() => {
 
@@ -61,10 +60,6 @@ const CommentItem = ({ comment, activeUser }) => {
         }
     }
 
-    useEffect(() => {
-        getStoryComments()
-    }, [setCommentList])
-
     const handleDelete = async () => {
         const comment_id = comment._id
         if (window.confirm("Вы хотите удалить этот комментарий?")) {
@@ -76,8 +71,6 @@ const CommentItem = ({ comment, activeUser }) => {
                     },
                 })
 
-                const { data } = await axios.get(`/comment/${slug}/getAllComment`)
-                setCommentList(data.data)
                 // navigate(`/story/${story.slug}`)
                 // location.reload()
                 // window.location.reload();

@@ -8,7 +8,7 @@ const { validateUserInput, comparePassword } = require("../Helpers/input/inputHe
 const getPrivateData = asyncErrorWrapper((req, res, next) => {
     return res.status(200).json({
         success: true,
-        message: "You got access to the private data in this route ",
+        message: "Вы получили доступ к личным данным на этом маршруте ",
         user: req.user
     })
 })
@@ -26,14 +26,14 @@ const register = asyncErrorWrapper(async (req, res, next) => {
 const login = asyncErrorWrapper(async (req, res, next) => {
     const { email, password } = req.body
     if (!validateUserInput(email, password)) {
-        return next(new CustomError("Please check your inputs", 400))
+        return next(new CustomError("Пожалуйста, проверьте свои данные", 400))
     }
     const user = await User.findOne({ email }).select("+password")
     if (!user) {
-        return next(new CustomError("Invalid credentials", 404))
+        return next(new CustomError("Неверные данные", 404))
     }
     if (!comparePassword(password, user.password)) {
-        return next(new CustomError("Please chech your credentails", 404))
+        return next(new CustomError("Пожалуйста, проверьте свои данные.", 404))
     }
     sendToken(user, 200, res);
 })
@@ -43,13 +43,13 @@ const forgotpassword = asyncErrorWrapper(async (req, res, next) => {
     const resetEmail = req.body.email;
     const user = await User.findOne({ email: resetEmail })
     if (!user) {
-        return next(new CustomError("There is no user with that email", 400))
+        return next(new CustomError("Нет пользователя с таким e-mail", 400))
     }
     const resetPasswordToken = user.getResetPasswordTokenFromUser();
     await user.save();
     const resetPasswordUrl = `${URI}/resetpassword?resetPasswordToken=${resetPasswordToken}`
     const emailTemplate = `
-    <h3 style="color : red "> Reset Your Password </h3>
+    <h3 style="color : red "> Сбросьте свой пароль </h3>
     <p> This <a href=${resetPasswordUrl}   
      target='_blank'  >Link </a> will expire in 1 hours </p> 
     `;
@@ -78,14 +78,14 @@ const resetpassword = asyncErrorWrapper(async (req, res, next) => {
     const newPassword = req.body.newPassword || req.body.password
     const { resetPasswordToken } = req.query
     if (!resetPasswordToken) {
-        return next(new CustomError("Please provide a valid token ", 400))
+        return next(new CustomError("Пожалуйста, предоставьте действительный токен ", 400))
     }
     const user = await User.findOne({
         resetPasswordToken: resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
     })
     if (!user) {
-        return next(new CustomError("Invalid token or Session Expired", 400))
+        return next(new CustomError("Недействительный токен или срок действия сеанса истек", 400))
     }
     user.password = newPassword;
     user.resetPasswordToken = undefined
@@ -93,7 +93,7 @@ const resetpassword = asyncErrorWrapper(async (req, res, next) => {
     await user.save();
     return res.status(200).json({
         success: true,
-        message: "Reset Password access successfull"
+        message: "Пароль изменен"
     })
 })
 

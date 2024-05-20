@@ -9,6 +9,7 @@ const CommentItem = ({ comment, activeUser }) => {
     const slug = useParams().slug
     const [likeCount, setLikeCount] = useState(comment.likeCount)
     const [likeStatus, setLikeStatus] = useState(false)
+    const [commentlist, setCommentList] = useState([])
 
     useEffect(() => {
 
@@ -64,12 +65,15 @@ const CommentItem = ({ comment, activeUser }) => {
         const comment_id = comment._id
         if (window.confirm("Do you want to delete this post")) {
             try {
-                const { data } = await axios.delete(`/comment/${slug}/${comment_id}/delete`, {
+                const { dataD } = await axios.delete(`/comment/${slug}/${comment_id}/delete`, {
                     headers: {
                         "Content-Type": "application/json",
                         authorization: `Bearer ${localStorage.getItem("authToken")}`,
                     },
                 })
+
+                const { data } = await axios.get(`/comment/${slug}/getAllComment`)
+                setCommentList(data.data)
                 // navigate(`/story/${story.slug}`)
                 // location.reload()
                 // window.location.reload();

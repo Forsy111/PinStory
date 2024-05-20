@@ -16,7 +16,7 @@ const addStory = asyncErrorWrapper(async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            message: "add story successfully ",
+            message: "Пост создан ",
             data: newStory
         })
     }
@@ -129,7 +129,7 @@ const deleteStory = asyncErrorWrapper(async (req, res, next) => {
     return res.status(200).
         json({
             success: true,
-            message: "Story delete succesfully "
+            message: "Пост удален "
         })
 })
 

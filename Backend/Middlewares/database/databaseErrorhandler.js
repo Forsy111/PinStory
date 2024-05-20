@@ -8,7 +8,7 @@ const checkStoryExist = asyncErrorWrapper(async (req, res, next) => {
         slug: slug
     })
     if (!story) {
-        return next(new CustomError("There is no such story with that slug ", 400))
+        return next(new CustomError("Таково поста нет ", 400))
     }
     next();
 })
@@ -20,7 +20,7 @@ const checkUserAndStoryExist = asyncErrorWrapper(async (req, res, next) => {
         author: req.user
     })
     if (!story) {
-        return next(new CustomError("There is no story with that slug associated with User ", 400))
+        return next(new CustomError("Нет истории пользователя ", 400))
     }
     next();
 })

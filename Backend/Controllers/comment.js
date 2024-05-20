@@ -36,7 +36,7 @@ const deleteComment = asyncErrorWrapper(async (req, res, next) => {
     return res.status(200).
         json({
             success: true,
-            message: "Comment delete succesfully ",
+            message: "Комментарий удален ",
             data: story
         })
 })

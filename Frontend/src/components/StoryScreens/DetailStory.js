@@ -95,7 +95,7 @@ const DetailStory = () => {
   }
 
   const handleDelete = async () => {
-    if (window.confirm("Do you want to delete this post")) {
+    if (window.confirm("Вы хотите удалить этот пост?")) {
       try {
         await axios.delete(`/story/${slug}/delete`, {
           headers: {

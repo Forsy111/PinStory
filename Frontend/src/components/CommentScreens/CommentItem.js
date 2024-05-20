@@ -61,9 +61,13 @@ const CommentItem = ({ comment, activeUser }) => {
         }
     }
 
+    useEffect(() => {
+        getStoryComments()
+    }, [setCommentList])
+
     const handleDelete = async () => {
         const comment_id = comment._id
-        if (window.confirm("Do you want to delete this post")) {
+        if (window.confirm("Вы хотите удалить этот комментарий?")) {
             try {
                 const { dataD } = await axios.delete(`/comment/${slug}/${comment_id}/delete`, {
                     headers: {

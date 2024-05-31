@@ -12,23 +12,25 @@ const StorySchema = new mongoose.Schema({
     slug: String,
     title: {
         type: String,
-        required: [true, "Please provide a title"],
+        required: [true, "Введите заголовок"],
         unique: true,
-        minlength: [4, "Please provide a title least 4 characters "],
+        minlength: [4, "Введите минимум 4 символа у заголовка "],
+        maxlength: [22, "Максимальное количество символов - 22"],
     },
     content: {
         type: String,
-        required: [true, "Please a provide a content "],
-        minlength: [10, "Please provide a content least 10 characters "],
+        required: [true, "Введите описание "],
+        minlength: [10, "Введите минимум 10 символа у описания "],
+        maxlength: [220, "Максимальное количество символов - 220"],
     },
     image: {
         type: String,
         default: "default.jpg"
     },
-    readtime: {
-        type: Number,
-        default: 3
-    },
+    // readtime: {
+    //     type: Number,
+    //     default: 3
+    // },
     likes: [{
         type: mongoose.Schema.ObjectId,
         ref: "User"

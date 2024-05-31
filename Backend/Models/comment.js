@@ -9,7 +9,8 @@ const CommentSchema = new mongoose.Schema({
     content: {
         type: String,
         required: [true, "Please provide a content"],
-        minlength: [3, " Please provide a content least 3 characters"]
+        minlength: [3, "Введите минимум 3 символа"],
+        maxlength: [220, "Максимальное количество символов 220"],
     },
     author: {
         type: mongoose.Schema.ObjectId,
@@ -24,10 +25,10 @@ const CommentSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    star: {
-        type: Number,
-        default: 0
-    }
+    // star: {
+    //     type: Number,
+    //     default: 0
+    // }
 }, { timestamps: true })
 
 

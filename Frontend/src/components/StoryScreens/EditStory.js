@@ -51,7 +51,7 @@ const EditStory = () => {
 
         try {
             const { data } = await axios.put(`/story/${slug}/edit`, formdata, config)
-            setSuccess('Edit Story successfully ')
+            setSuccess('Пост изменен ')
             setTimeout(() => {
                 navigate('/')
             }, 2500)
@@ -74,7 +74,7 @@ const EditStory = () => {
                             <span>
                                 {success}
                             </span>
-                            <Link to="/">Go home</Link>
+                            <Link to="/">На главную</Link>
                         </div>}
                         <input
                             type="text"

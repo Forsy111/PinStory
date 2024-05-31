@@ -28,11 +28,19 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
     allowedMimeTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"]
     if (!allowedMimeTypes.includes(file.mimetype)) {
-        return (new CustomError("Please provide a valid image file ", 400), null)
+        return (new CustomError("Загрузите изображение ", 400), null)
     }
     cb(null, true);
 }
 
-const imageUpload = multer({ storage, fileFilter })
+const fileSize = (req, file, cb) => {
+    const maxSize = 1 * 1024 * 10024;
+    if (file.buffer.byteLength >= maxSize) {
+        return (new CustomError("Загрузите изображение меньшего размера ", 400), null)
+    }
+    cb(null, true);
+}
+
+const imageUpload = multer({ storage, fileFilter, fileSize })
 
 module.exports = imageUpload;
